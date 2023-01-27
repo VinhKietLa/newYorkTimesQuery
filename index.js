@@ -1,8 +1,8 @@
 // let startYear = "20120101";
 // let endYear = "20151212";
 
-let startYear = document.getElementById('startYear');
-let endYear = document.getElementById('startYear');
+let startYearInput = document.getElementById('startYear');
+let endYearInput = document.getElementById('startYear');
 
 let searchBtn = document.getElementById("searchBtn");
 let searchContainer = document.getElementById("searchContainer");
@@ -28,20 +28,23 @@ function getSelectedDataSet() {
   return numberOfRequests;
 }
 
-function getSelectedYears() {
-    let selectedStartYear = startYear.value;
+function getSelectedStartYears() {
+    let selectedStartYear = startYearInput.value;
     selectedStartYear = selectedStartYear.replace(/-/g, "");
-    let selectedEndYear = endYear.value;
-    selectedEndYear = selectedEndYear.replace(/-/g, "");
-    console.log(selectedStartYear);
-    console.log(selectedEndYear);
+    return selectedStartYear;
+}
 
+function getSelectedEndYears() {
+    let selectedEndYear = endYearInput.value;
+    selectedEndYear = selectedEndYear.replace(/-/g, "");
+    return selectedEndYear;
 }
 
 searchContainer.addEventListener("click", function (event) {
   if (event.target.id === "searchBtn") {
-    getSelectedYears()
-    let page = getSelectedDataSet();
+    let startYear = getSelectedStartYears();
+    let endYear = getSelectedEndYears();
+    getSelectedDataSet();
 
     let searched = "";
     searched = searchTerm.value;
