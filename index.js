@@ -75,7 +75,28 @@ searchContainer.addEventListener("click", function (event) {
       fetch(queryURL)
         .then((response) => response.json())
         .then((response) => {
-          console.log(response.response.docs);
+          let results = response.response.docs
+
+          for (let i = 0; i < results.length; i++) {
+              const apiResults = results[i];
+              console.log(apiResults)
+              let headline = apiResults.headline.main;
+              let abstract = apiResults.abstract;
+              let webURL = apiResults.web_url
+              let pubDate = apiResults.pub_date;
+              pubDate = pubDate.substring(0, 10);
+
+              let newDiv = document.createElement('DIV');
+
+              newDiv.innerHTML = 
+              `<h5 class="headline">${headline}</h5>
+              <h6 class="abstract">${abstract}</h6>
+             <a class="anchor">${webURL}</a>
+             <p>Published: ${pubDate}</p>
+              `
+              articles.append(newDiv);
+          }
+
         });
     }
   } else if (event.target.id === "searchBtn") {
@@ -96,7 +117,6 @@ searchContainer.addEventListener("click", function (event) {
         fetch(queryURL)
           .then((response) => response.json())
           .then((response) => {
-            console.log(response.response.docs);
             let results = response.response.docs
 
             for (let i = 0; i < results.length; i++) {
@@ -105,22 +125,23 @@ searchContainer.addEventListener("click", function (event) {
                 let headline = apiResults.headline.main;
                 let abstract = apiResults.abstract;
                 let webURL = apiResults.web_url
-
+                let pubDate = apiResults.pub_date;
+                pubDate = pubDate.substring(0, 10);
                 let newDiv = document.createElement('DIV');
 
                 newDiv.innerHTML = 
                 `<h5 class="headline">${headline}</h5>
                 <h6 class="abstract">${abstract}</h6>
                <a class="anchor">${webURL}</a>
-                `
-
+               <p>Published: ${pubDate}</p>
+               `
                 articles.append(newDiv);
-
             }
           });
       }
   }
 });
+
 
 // fetch(queryURL)
 //   .then((response) => response.json())

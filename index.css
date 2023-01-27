@@ -1,5 +1,9 @@
+@font-face {
+    font-family: 'NewYork';
+    src:  url('https://dl.dropboxusercontent.com/s/iof5dmq02bc4v0p/Chomsky.woff2?dl=0') format('woff2');
+  }
+
 
 .navbar {
-    background-color: navy;
-    color: white;
+    font-family: 'NewYork', serif;
 }
