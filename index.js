@@ -1,8 +1,8 @@
 // let startYear = "20120101";
 // let endYear = "20151212";
 
-let startYearInput = document.getElementById('startYear');
-let endYearInput = document.getElementById('startYear');
+let startYearInput = document.getElementById("startYear");
+let endYearInput = document.getElementById("startYear");
 
 let searchBtn = document.getElementById("searchBtn");
 let searchContainer = document.getElementById("searchContainer");
@@ -17,35 +17,43 @@ function getSelectedDataSet() {
   if (dataSetValue == 0) {
     console.log("hi");
     numberOfRequests.push("1");
-    console.log(numberOfRequests);
+    return numberOfRequests;
+
   } else if (dataSetValue == 1) {
     numberOfRequests.push("1", "2");
+    return numberOfRequests;
+
   } else if (dataSetValue == 2) {
     numberOfRequests.push("1", "2", "3");
+    return numberOfRequests;
   }
-  console.log(numberOfRequests);
-
-  return numberOfRequests;
+  else {
+    return numberOfRequests;
+  } 
 }
 
 function getSelectedStartYears() {
-    let selectedStartYear = startYearInput.value;
-    selectedStartYear = selectedStartYear.replace(/-/g, "");
-    return selectedStartYear;
+  let selectedStartYear = startYearInput.value;
+  selectedStartYear = selectedStartYear.replace(/-/g, "");
+  return selectedStartYear;
 }
 
 function getSelectedEndYears() {
-    let selectedEndYear = endYearInput.value;
-    selectedEndYear = selectedEndYear.replace(/-/g, "");
-    return selectedEndYear;
+  let selectedEndYear = endYearInput.value;
+  selectedEndYear = selectedEndYear.replace(/-/g, "");
+  return selectedEndYear;
 }
 
 searchContainer.addEventListener("click", function (event) {
-  if (event.target.id === "searchBtn") {
+  if (
+    event.target.id === "searchBtn" &&
+    startYearInput.value != "" &&
+    endYearInput.value != ""
+  ) {
+    isYear = true;
     let startYear = getSelectedStartYears();
     let endYear = getSelectedEndYears();
     getSelectedDataSet();
-
     let searched = "";
     searched = searchTerm.value;
 
@@ -68,6 +76,27 @@ searchContainer.addEventListener("click", function (event) {
           console.log(response.response.docs);
         });
     }
+  } else if (event.target.id === "searchBtn") {
+
+   let page = getSelectedDataSet();
+
+   console.log(page);
+    let searched = "";
+    searched = searchTerm.value;
+    for (let i = 1; i <= numberOfRequests.length; i++) {
+        console.log(searched);
+        console.log(numberOfRequests);
+        let queryURL =
+          "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
+          searched +"&page=" +
+          i +
+          "&api-key=Bq0ZfhRwKnR4t8433PGAy8T9YOzcUzJJ";
+        fetch(queryURL)
+          .then((response) => response.json())
+          .then((response) => {
+            console.log(response.response.docs);
+          });
+      }
   }
 });
 
