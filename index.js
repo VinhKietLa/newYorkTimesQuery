@@ -15,35 +15,45 @@ let searchContainer = document.getElementById("searchContainer");
 
 let searchTerm = document.getElementById("searchTerms");
 
+let numRecords = document.querySelector("#numRecords");
+
 // let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + "&begin_date=" + startYear + "&end_date=" + endYear + "&api-key=Bq0ZfhRwKnR4t8433PGAy8T9YOzcUzJJ"
 
 // let queryURL =
 //   "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=money&page=2&api-key=Bq0ZfhRwKnR4t8433PGAy8T9YOzcUzJJ";
+let numberOfRequests = [];
 
-function getSelectedDataSet(num) {
+function getSelectedDataSet() {
   let selectedOption =
-    document.querySelector("#numRecords").options[
-      document.querySelector("#numRecords").selectedIndex
+  numRecords.options[
+    numRecords.selectedIndex
     ];
   let dataSetValue = selectedOption.getAttribute("data-set");
   console.log(dataSetValue);
-  return dataSetValue;
+  if(dataSetValue == 0){
+    console.log('hi');
+    numberOfRequests.push('1');
+    console.log(numberOfRequests);
+  } else if (dataSetValue == 1) {
+    numberOfRequests.push('1','2')
+  } else if (dataSetValue == 2) {
+    numberOfRequests.push('1','2','3');
+  }
+  console.log(numberOfRequests)
+
+  return numberOfRequests;
 }
+console.log(numberOfRequests)
+// numRecords.addEventListener("change", getSelectedDataSet);
 
-document
-  .querySelector("#numRecords")
-  .addEventListener("change", getSelectedDataSet);
-
-  let numberOfRequests = [];
 
 searchContainer.addEventListener("click", function (event) {
-  event.preventDefault;
 
   if (event.target.id === "searchBtn") {
 
     let page = getSelectedDataSet();
-    numberOfRequests.push(page);
-    console.log(numberOfRequests);
+    // numberOfRequests.push(page);
+    // console.log(numberOfRequests);
     let searched = "";
     searched = searchTerm.value;
 
@@ -51,6 +61,7 @@ searchContainer.addEventListener("click", function (event) {
 // console.log(test.length);
 
 for (let i = 1; i <= numberOfRequests.length; i++) {
+    console.log(searched)
     console.log(numberOfRequests);
     let queryURL =
     "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" +
@@ -68,8 +79,6 @@ for (let i = 1; i <= numberOfRequests.length; i++) {
         console.log(response.response.docs);
     });
 }
-
-
   }
 });
 
