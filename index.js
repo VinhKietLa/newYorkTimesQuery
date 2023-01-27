@@ -15,6 +15,8 @@ let endYear = '20151212';
 
 let searchBtn = document.getElementById('searchBtn');
 
+let searchContainer = document.getElementById('searchContainer');
+
 // let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=" + searchTerm + "&begin_date=" + startYear + "&end_date=" + endYear + "&api-key=Bq0ZfhRwKnR4t8433PGAy8T9YOzcUzJJ"
 
 let queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q=&api-key=Bq0ZfhRwKnR4t8433PGAy8T9YOzcUzJJ"
@@ -39,6 +41,10 @@ fetch(queryURL)
     console.log(response.response.docs[0]);
 })
 
+
+// put eventlistener on the whole container and only execute if the search button is clicked.
+// in the if statement take all the values from the inputs and use this in the query.
+ //clear button will clear all input fields.
 
 //temp1.response.docs[i]//
 
