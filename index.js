@@ -9,6 +9,7 @@ let searchContainer = document.getElementById("searchContainer");
 let searchTerm = document.getElementById("searchTerms");
 let numRecords = document.querySelector("#numRecords");
 let numberOfRequests = [];
+let clearBtn = document.getElementById('clearBtn');
 
 let articles = document.querySelector("#articles");
 
@@ -52,7 +53,6 @@ searchContainer.addEventListener("click", function (event) {
     startYearInput.value != "" &&
     endYearInput.value != ""
   ) {
-    isYear = true;
     let startYear = getSelectedStartYears();
     let endYear = getSelectedEndYears();
     getSelectedDataSet();
@@ -141,6 +141,10 @@ searchContainer.addEventListener("click", function (event) {
       }
   }
 });
+
+clearBtn.addEventListener('click', () => {
+  searchContainer.reset();
+})
 
 
 // fetch(queryURL)
