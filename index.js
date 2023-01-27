@@ -10,6 +10,8 @@ let searchTerm = document.getElementById("searchTerms");
 let numRecords = document.querySelector("#numRecords");
 let numberOfRequests = [];
 
+let articles = document.querySelector("#articles");
+
 function getSelectedDataSet() {
   let selectedOption = numRecords.options[numRecords.selectedIndex];
   let dataSetValue = selectedOption.getAttribute("data-set");
@@ -95,6 +97,26 @@ searchContainer.addEventListener("click", function (event) {
           .then((response) => response.json())
           .then((response) => {
             console.log(response.response.docs);
+            let results = response.response.docs
+
+            for (let i = 0; i < results.length; i++) {
+                const apiResults = results[i];
+                console.log(apiResults)
+                let headline = apiResults.headline.main;
+                let abstract = apiResults.abstract;
+                let webURL = apiResults.web_url
+
+                let newDiv = document.createElement('DIV');
+
+                newDiv.innerHTML = 
+                `<h5 class="headline">${headline}</h5>
+                <h6 class="abstract">${abstract}</h6>
+               <a class="anchor">${webURL}</a>
+                `
+
+                articles.append(newDiv);
+
+            }
           });
       }
   }
