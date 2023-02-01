@@ -48,6 +48,7 @@ function getSelectedEndYears() {
 }
 
 searchContainer.addEventListener("click", function (event) {
+  // event.preventDefault();
   if (
     event.target.id === "searchBtn" &&
     startYearInput.value != "" &&
@@ -100,6 +101,7 @@ searchContainer.addEventListener("click", function (event) {
         });
     }
   } else if (event.target.id === "searchBtn") {
+    // event.preventDefault();
 
    let page = getSelectedDataSet();
 
