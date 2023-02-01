@@ -16,4 +16,4 @@ Hosted using Github pages for a preview this can be found here -> https://vinhki
 
 #### Screenshot:
 
-![screenshot of portfolio](./images/portfolioss.png)
+![screenshot of portfolio](starter/Images/screenshotofapp.png) 
